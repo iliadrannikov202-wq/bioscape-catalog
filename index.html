@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Каталог BioScape</title>
+<meta name="description" content="Тропические растения, животные и оформленные террариумы BioScape: цены и наличие.">
+<meta name="theme-color" content="#050B08">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap">
+<style>
+/* Витрина под вкладками разделов; данные из Google-таблицы, стиль Neon Jungle, одна тёмная тема намеренно. */
+:root {
+  --accent: #3DF5A0; --accent-soft: rgba(61,245,160,.10); --accent-line: rgba(61,245,160,.38);
+  --lime: #D4DE6A; --lime-soft: rgba(212,222,106,.14);
+  --bg-top: #10241A; --bg-mid: #0B1A12; --bg-deep: #050B08; --page: #030705;
+  --ink: #EAF3EC; --ink-muted: #8CCB9E; --ink-faint: rgba(140,203,158,.62); --on-accent: #050B08;
+  --line: rgba(140,203,158,.18); --card: rgba(234,243,236,.04); --scrim: rgba(2,6,4,.78);
+  --font-display: 'Cormorant', 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-body: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --radius: 12px;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { background: var(--page); }
+body { margin: 0; background-color: var(--bg-deep); background-image: radial-gradient(110% 620px at 50% 0%, var(--bg-top), var(--bg-mid) 55%, transparent 100%); background-repeat: no-repeat;
+  color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+body.locked { overflow: hidden; }
+button { font: inherit; color: inherit; cursor: pointer; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+#app { max-width: 1180px; margin: 0 auto; padding-inline: 16px; padding-block: env(safe-area-inset-top, 0px) 60px; }
+
+.hero { position: relative; padding-block: 44px 26px; display: grid; gap: 10px; }
+.hero-leaves { position: absolute; inset: 0 -16px 0 auto; width: min(52vw, 340px); overflow: hidden; pointer-events: none; }
+.hero-leaves svg { position: absolute; width: 150px; opacity: .55; }
+.hero-leaves svg:first-child { right: -26px; top: 6px; transform: rotate(28deg); }
+.hero-leaves svg:last-child { right: 70px; top: 70px; width: 96px; transform: rotate(-22deg); opacity: .32; }
+.lf { fill: var(--accent-soft); stroke: var(--accent-line); stroke-width: 1.4; }
+.lv { fill: none; stroke: var(--accent-line); stroke-width: 1; }
+.eyebrow { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); }
+.hero h1 { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: clamp(52px, 11vw, 92px); line-height: .9; letter-spacing: -.01em; }
+.hero h1 em { font-style: italic; color: var(--accent); }
+.lede { margin: 4px 0 0; max-width: 46ch; color: var(--ink-muted); font-size: 15.5px; position: relative; }
+.meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-top: 8px; position: relative; }
+.chip { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: var(--lime-soft); color: var(--lime); font-size: 13px; font-weight: 700; }
+.chip::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 10px var(--lime); }
+.contact { font-size: 14px; }
+
+.tabs { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin-inline: -16px; padding: 10px 16px;
+  background: rgba(5,11,8,.86); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { flex: 1 0 auto; display: inline-flex; justify-content: center; align-items: center; gap: 6px; min-height: 42px; padding: 0 11px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); font-weight: 700; font-size: 14px; }
+.tab span { font-size: 12px; color: var(--ink-muted); font-variant-numeric: tabular-nums; }
+.tab.on { background: var(--accent); border-color: var(--accent); color: var(--on-accent); box-shadow: 0 0 22px rgba(61,245,160,.28); }
+.tab.on span { color: var(--on-accent); opacity: .7; }
+
+.group { padding-top: 30px; }
+.group-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-bottom: 12px; margin-bottom: 14px; border-bottom: 1px solid var(--line); }
+.group-head h2 { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 32px; line-height: 1; }
+.group-head span { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (min-width: 640px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; } }
+@media (min-width: 960px) { .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; } }
+
+.card { display: flex; flex-direction: column; min-width: 0; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; transition: border-color .2s; }
+.card:hover { border-color: var(--accent-line); }
+.card-photo { position: relative; display: block; width: 100%; aspect-ratio: 4 / 5; padding: 0; border: 0; background: #000; overflow: hidden; }
+.card-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
+.card:hover .card-photo img { transform: scale(1.035); }
+.ph-count { position: absolute; left: 8px; bottom: 8px; padding: 3px 8px; border-radius: 999px; background: rgba(5,11,8,.72); font-size: 11px; font-weight: 700; }
+.ph-empty { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 8px; background: radial-gradient(circle at 50% 40%, var(--bg-top), var(--bg-deep)); color: var(--ink-faint); font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.ph-empty svg { width: 54px; }
+.ph-empty.big { position: relative; aspect-ratio: 1; width: 100%; flex: 0 0 100%; }
+.card-body { display: flex; flex-direction: column; gap: 4px; padding: 12px 12px 13px; flex: 1; min-width: 0; }
+.latin { margin: 0; font-family: var(--font-display); font-style: italic; font-weight: 600; font-size: 20px; line-height: 1.08; overflow-wrap: anywhere; }
+.ru { margin: 0; font-size: 12.5px; color: var(--ink-muted); line-height: 1.35; }
+.note { margin: 0; font-size: 12px; color: var(--ink-faint); line-height: 1.35; }
+.variants { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 4px; }
+.variants li { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-size: 12px; color: var(--ink-muted); line-height: 1.3; }
+.variants b { color: var(--lime); font-weight: 800; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.deal { margin: 6px 0 0; padding: 6px 9px; border-radius: 8px; background: var(--lime-soft); color: var(--lime); font-size: 12px; font-weight: 700; line-height: 1.3; }
+.card-foot { margin-top: auto; padding-top: 8px; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 8px; }
+.price { font-size: 17px; font-weight: 800; color: var(--lime); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.stock { display: inline-flex; align-items: center; gap: 6px; margin: 0; font-size: 11.5px; font-weight: 600; color: var(--ink-muted); white-space: nowrap; }
+.stock::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+.stock.low { color: var(--lime); }
+.stock.low::before { background: var(--lime); box-shadow: 0 0 8px var(--lime); }
+.stock.out { color: var(--ink-faint); }
+.stock.out::before { background: transparent; box-shadow: none; border: 1px solid var(--ink-faint); }
+.card.is-out .card-photo img { filter: grayscale(.85); opacity: .45; }
+.card.is-out .price, .card.is-out .variants b { color: var(--ink-faint); }
+
+.foot { margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--line); display: grid; gap: 4px; color: var(--ink-faint); font-size: 13px; }
+.foot b { font-family: var(--font-display); font-size: 22px; font-weight: 600; color: var(--ink); }
+.loading { padding: 40px 0; color: var(--ink-muted); }
+
+.sheet { position: fixed; inset: 0; z-index: 30; display: flex; align-items: flex-end; justify-content: center; background: var(--scrim); }
+.panel { position: relative; width: 100%; max-width: 560px; max-height: 92dvh; overflow-y: auto; overscroll-behavior: contain; background: var(--bg-mid); border: 1px solid var(--line); border-bottom: 0; border-radius: 18px 18px 0 0; padding-bottom: env(safe-area-inset-bottom, 0px); }
+@media (min-width: 700px) { .sheet { align-items: center; padding: 24px; } .panel { border-radius: 18px; border-bottom: 1px solid var(--line); } }
+.sheet-close { position: sticky; top: 10px; float: right; margin: 10px 10px -52px 0; z-index: 2; width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--line); background: rgba(5,11,8,.8); font-size: 24px; line-height: 1; }
+.gallery { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; background: #000; scrollbar-width: none; }
+.gallery::-webkit-scrollbar { display: none; }
+.gallery img { flex: 0 0 100%; width: 100%; aspect-ratio: 1; object-fit: contain; scroll-snap-align: center; }
+.swipe { margin: 8px 18px 0; font-size: 12px; color: var(--ink-faint); }
+.panel-body { display: grid; gap: 8px; padding: 18px 18px 22px; }
+.panel-body .latin { font-size: 32px; }
+.panel-body .ru { font-size: 15px; }
+.panel-body .note { font-size: 14px; }
+.panel-body .variants li { font-size: 15px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.panel-body .price { font-size: 26px; }
+.panel-body .stock { font-size: 14px; }
+.panel-body .deal { font-size: 14.5px; padding: 10px 12px; }
+.order { margin: 8px 0 0; padding: 12px 14px; border-radius: 10px; background: var(--accent-soft); border: 1px solid var(--accent-line); font-size: 14.5px; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
+</style>
+</head>
+<body>
+<div id="app"><p class="loading">Загружаю каталог…</p></div>
+<div class="sheet" id="sheet" hidden></div>
+<script>
+(() => {
+  'use strict';
+  // Цены и наличие берутся из Google-таблицы «BioScape — каталог для сайта».
+  const SHEET_ID = '1LCfqov097mc5-inoVQtATF0ORKXqY4IEmxbn38hgJdY';
+  const SHEET_URL = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:csv&gid=0';
+  const CONTACT = 'Чтобы заказать или уточнить детали, напишите BioScape в личные сообщения.';
+  const SECTION_ORDER = ['Растения', 'Животные', 'Террариумы'];
+  const LEAF = '<svg viewBox="0 0 120 170" aria-hidden="true"><path class="lf" d="M60 6C100 34 106 104 60 164C14 104 20 34 60 6Z"/><path class="lv" d="M60 18V158M60 52L84 34M60 52L36 34M60 82L90 60M60 82L30 60M60 112L86 92M60 112L34 92M60 140L76 126M60 140L44 126"/></svg>';
+
+  const $app = document.getElementById('app');
+  const $sheet = document.getElementById('sheet');
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const nf = new Intl.NumberFormat('ru-RU');
+  const num = v => { const n = parseInt(String(v == null ? '' : v).replace(/[^\d]/g, ''), 10); return isNaN(n) ? 0 : n; };
+  const money = v => nf.format(num(v)) + ' ₽';
+  const norm = s => String(s || '').trim().toLowerCase().replace(/\s+/g, ' ');
+
+  let items = [], sections = [], tab = '', live = true;
+
+  function parseCSV(text) {
+    const rows = []; let row = [], cell = '', q = false;
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i];
+      if (q) {
+        if (c === '"') { if (text[i + 1] === '"') { cell += '"'; i++; } else q = false; }
+        else cell += c;
+      } else if (c === '"') q = true;
+      else if (c === ',') { row.push(cell); cell = ''; }
+      else if (c === '\n' || c === '\r') { if (c === '\r' && text[i + 1] === '\n') i++; row.push(cell); rows.push(row); row = []; cell = ''; }
+      else cell += c;
+    }
+    if (cell !== '' || row.length) { row.push(cell); rows.push(row); }
+    return rows;
+  }
+  function photoUrl(s) {
+    s = s.trim();
+    if (!s) return '';
+    const drive = s.match(/drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:export=\w+&)?id=)([\w-]{10,})/);
+    if (drive) return 'https://lh3.googleusercontent.com/d/' + drive[1] + '=w900';
+    if (/^https?:\/\//.test(s)) return s;
+    return s;
+  }
+  function fromRows(rows) {
+    const head = rows[0].map(norm);
+    const col = name => head.findIndex(h => h.startsWith(name));
+    const C = { sec: col('раздел'), grp: col('группа'), name: col('название'), ru: col('подпись'), note: col('примечание'), price: col('цена,'), max: col('цена до'), vars: col('варианты'), qty: col('количество'), show: col('показывать'), photos: col('фото'), bundle: col('комплект') };
+    const get = (r, k) => C[k] >= 0 ? String(r[C[k]] == null ? '' : r[C[k]]).trim() : '';
+    const list = rows.slice(1).filter(r => get(r, 'name')).map(r => ({
+      sec: get(r, 'sec') || 'Другое', grp: get(r, 'grp') || get(r, 'sec') || 'Другое',
+      name: get(r, 'name'), ru: get(r, 'ru'), note: get(r, 'note'),
+      price: num(get(r, 'price')), max: num(get(r, 'max')), qty: num(get(r, 'qty')),
+      hidden: /^(нет|no|скрыть|0|-)$/i.test(get(r, 'show')),
+      variants: get(r, 'vars').split(';').map(v => { const i = v.lastIndexOf(':'); return i > 0 ? { label: v.slice(0, i).trim(), price: num(v.slice(i + 1)) } : null; }).filter(Boolean),
+      photos: get(r, 'photos').split(/[,\n]+/).map(photoUrl).filter(Boolean),
+      bundle: get(r, 'bundle').split('+').map(norm).filter(Boolean)
+    })).filter(it => !it.hidden);
+    return list;
+  }
+  function build(list) {
+    items = list;
+    const secNames = SECTION_ORDER.filter(s => list.some(i => i.sec === s)).concat([...new Set(list.map(i => i.sec))].filter(s => SECTION_ORDER.indexOf(s) < 0));
+    sections = secNames.map(s => ({ title: s, groups: [...new Set(list.filter(i => i.sec === s).map(i => i.grp))] }));
+    if (!sections.some(s => s.title === tab)) tab = sections.length ? sections[0].title : '';
+  }
+
+  const basePrice = it => it.variants.length ? Math.min.apply(null, it.variants.map(v => v.price)) : it.price;
+  function priceHtml(it) {
+    if (it.variants.length) return '<ul class="variants">' + it.variants.map(v => '<li><span>' + esc(v.label) + '</span><b>' + money(v.price) + '</b></li>').join('') + '</ul>';
+    if (it.max > it.price) return '<span class="price">' + nf.format(it.price) + '–' + money(it.max) + '</span>';
+    return '<span class="price">' + money(it.price) + '</span>';
+  }
+  function dealHtml(it) {
+    if (!it.bundle.length) return '';
+    const parts = it.bundle.map(n => items.find(i => norm(i.name) === n));
+    if (parts.some(p => !p)) return '';
+    const sum = parts.reduce((s, p) => s + basePrice(p), 0);
+    return sum > it.price ? '<p class="deal">Выгода ' + money(sum - it.price) + ': по отдельности ' + money(sum) + '</p>' : '';
+  }
+  function stockHtml(it) {
+    if (!it.qty) return '<span class="stock out">нет в наличии</span>';
+    if (it.qty <= 3) return '<span class="stock low">осталось ' + it.qty + ' шт</span>';
+    return '<span class="stock">' + it.qty + ' шт в наличии</span>';
+  }
+  function card(it, idx) {
+    const ph = it.photos.length
+      ? '<img src="' + esc(it.photos[0]) + '" alt="' + esc(it.name) + '" loading="lazy" decoding="async">' + (it.photos.length > 1 ? '<span class="ph-count">' + it.photos.length + ' фото</span>' : '')
+      : '<span class="ph-empty">' + LEAF + '<span>фото скоро</span></span>';
+    return '<article class="card' + (it.qty ? '' : ' is-out') + '">'
+      + '<button type="button" class="card-photo" data-open="' + idx + '" aria-label="Подробнее: ' + esc(it.name) + '">' + ph + '</button>'
+      + '<div class="card-body"><h3 class="latin">' + esc(it.name) + '</h3>'
+      + (it.ru ? '<p class="ru">' + esc(it.ru) + '</p>' : '') + (it.note ? '<p class="note">' + esc(it.note) + '</p>' : '')
+      + (it.variants.length ? priceHtml(it) : '') + dealHtml(it)
+      + '<div class="card-foot">' + (it.variants.length ? '' : priceHtml(it)) + stockHtml(it) + '</div></div></article>';
+  }
+  function render() {
+    const today = new Date().toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' });
+    const sec = sections.find(s => s.title === tab);
+    let html = '<header class="hero"><div class="hero-leaves" aria-hidden="true">' + LEAF + LEAF + '</div>'
+      + '<p class="eyebrow">BioScape</p><h1>Каталог<br><em>живого</em></h1>'
+      + '<p class="lede">Тропические растения, животные и оформленные террариумы. Цена указана за одну штуку, если не написано иное.</p>'
+      + '<div class="meta"><span class="chip">' + (live ? 'Наличие на ' + esc(today) : 'Наличие на 7 октября') + '</span><span class="contact">' + esc(CONTACT) + '</span></div></header>';
+    html += '<nav class="tabs" aria-label="Разделы каталога">' + sections.map(s => '<button type="button" class="tab' + (s.title === tab ? ' on' : '') + '" data-tab="' + esc(s.title) + '" aria-pressed="' + (s.title === tab) + '">' + esc(s.title) + '<span>' + items.filter(i => i.sec === s.title && i.qty).length + '</span></button>').join('') + '</nav>';
+    html += '<main>' + (sec ? sec.groups.map(g => {
+      const list = items.map((it, i) => [it, i]).filter(([it]) => it.sec === sec.title && it.grp === g);
+      const sorted = list.filter(([it]) => it.qty).concat(list.filter(([it]) => !it.qty));
+      return '<section class="group"><div class="group-head"><h2>' + esc(g) + '</h2><span>' + list.filter(([it]) => it.qty).length + ' в наличии</span></div><div class="grid">' + sorted.map(([it, i]) => card(it, i)).join('') + '</div></section>';
+    }).join('') : '') + '</main>';
+    html += '<footer class="foot"><b>BioScape</b><span>' + esc(CONTACT) + '</span></footer>';
+    $app.innerHTML = html;
+  }
+  function openItem(it) {
+    const gallery = it.photos.length ? it.photos.map(p => '<img src="' + esc(p) + '" alt="' + esc(it.name) + '">').join('') : '<span class="ph-empty big">' + LEAF + '<span>фото скоро</span></span>';
+    $sheet.innerHTML = '<div class="panel" role="dialog" aria-modal="true" aria-label="' + esc(it.name) + '">'
+      + '<button type="button" class="sheet-close" data-close aria-label="Закрыть">×</button>'
+      + '<div class="gallery">' + gallery + '</div>' + (it.photos.length > 1 ? '<p class="swipe">Листайте вбок: ' + it.photos.length + ' фото</p>' : '')
+      + '<div class="panel-body"><p class="eyebrow">' + esc(it.grp) + '</p><h2 class="latin">' + esc(it.name) + '</h2>'
+      + (it.ru ? '<p class="ru">' + esc(it.ru) + '</p>' : '') + (it.note ? '<p class="note">' + esc(it.note) + '</p>' : '')
+      + priceHtml(it) + dealHtml(it) + '<p class="' + 'stock' + (it.qty ? (it.qty <= 3 ? ' low' : '') : ' out') + '">' + stockHtml(it).replace(/<[^>]+>/g, '') + '</p>'
+      + '<p class="order">' + esc(CONTACT) + '</p></div></div>';
+    $sheet.hidden = false;
+    document.body.classList.add('locked');
+    $sheet.querySelector('.sheet-close').focus();
+  }
+  function closeItem() { $sheet.hidden = true; $sheet.innerHTML = ''; document.body.classList.remove('locked'); }
+
+  $app.addEventListener('click', e => {
+    const t = e.target.closest('[data-tab]');
+    if (t) {
+      tab = t.dataset.tab;
+      try { localStorage.setItem('bioscape-tab', tab); } catch (err) { /* ничего */ }
+      const top = $app.querySelector('.tabs').offsetTop;
+      render();
+      if (window.scrollY > top) window.scrollTo(0, top);
+      return;
+    }
+    const o = e.target.closest('[data-open]');
+    if (o) openItem(items[Number(o.dataset.open)]);
+  });
+  $sheet.addEventListener('click', e => { if (e.target === $sheet || e.target.closest('[data-close]')) closeItem(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$sheet.hidden) closeItem(); });
+
+  async function start() {
+    try { tab = localStorage.getItem('bioscape-tab') || ''; } catch (e) { /* ничего */ }
+    let list = [];
+    try {
+      const res = await fetch(SHEET_URL + '&t=' + Date.now(), { cache: 'no-store' });
+      const text = await res.text();
+      if (!res.ok || /^\s*</.test(text)) throw new Error('sheet');
+      list = fromRows(parseCSV(text));
+      if (!list.length) throw new Error('empty');
+    } catch (e) {
+      live = false;
+      list = fromRows(parseCSV(await fetch('snapshot.csv').then(r => r.text())));
+    }
+    build(list);
+    render();
+  }
+  start();
+})();
+</script>
+</body>
+</html>
